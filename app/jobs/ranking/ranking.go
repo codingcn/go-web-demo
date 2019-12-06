@@ -1,0 +1,5 @@
+package ranking
+
+func UpdateSevenDaysRankingList()  {
+	
+}

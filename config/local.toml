@@ -1,0 +1,30 @@
+version = "1.0.0"
+name="go-web-demo"
+env="local"
+pid_file="go-web-demo.pid"
+jwt_sign="7AsBMHoAWeWkg1spyAjflanVOgHNJzVynHwEC1ZM2ZcD5dQTHcOn3asMdhBwzQ65"
+
+[http]
+    listen = "0.0.0.0:9903"
+[mysql]
+    [mysql.default]
+        datasource = "root:UVfzQX8a7i^JYiO$98B3RA9%PwxVTi%w@tcp(127.0.0.1:3380)/config?charset=utf8mb4&parseTime=True&loc=Local"
+        timeout = 3000 # 毫秒
+[redis]
+    [redis.default]
+        addr = "127.0.0.1:6350"
+        password = "Mbfk*LmfgnLon7TV@xdGIcon4m5t3xEY"
+        db = 0
+        timeout = 3000 # 毫秒
+[log]
+    # log配置，stdout在debug级别才会开启
+    # 生产环境采用json结构化日志，方便elk采集
+    log_level = "debug"           # 高级别会过滤掉低级别的日志，debug<info<warn<error<fatal<panic
+    log_file_name = "./storage/logs/go-gameserver.log"  #zap 业务日志路径
+    max_backups = 30              # 日志文件最多保存多少个备份
+    max_age = 7                   #  文件最多保存多少天
+    max_size = 1024               #  每个日志文件保存的最大尺寸 单位：M
+    compress = true               # 是否压缩
+
+    log_file_name_stdout= "./storage/logs/stdout.log"   # 标准输出
+    log_file_name_stderr= "./storage/logs/stderr.log"   # 标准错误输出

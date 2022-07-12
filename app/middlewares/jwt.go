@@ -1,10 +1,11 @@
 package middlewares
 
+import "C"
 import (
 	"errors"
 	"github.com/dgrijalva/jwt-go"
 	"github.com/gin-gonic/gin"
-	"go-web-demo/config"
+	"go-web-demo/kernel/tconfig"
 	"go-web-demo/kernel/zlog"
 	"go.uber.org/zap"
 	"net/http"
@@ -23,19 +24,19 @@ type CustomClaims struct {
 
 // 一些常量
 var (
-	TokenExpired     error  = errors.New("Token is expired")
-	TokenNotValidYet error  = errors.New("Token not active yet")
-	TokenMalformed   error  = errors.New("That's not even a token")
-	TokenInvalid     error  = errors.New("Couldn't handle this token")
-	SignKey          string = config.C.JWTSign
+	TokenExpired     error = errors.New("Token is expired")
+	TokenNotValidYet error = errors.New("Token not active yet")
+	TokenMalformed   error = errors.New("That's not even a token")
+	TokenInvalid     error = errors.New("Couldn't handle this token")
 )
 
 func NoAuth() gin.HandlerFunc {
 	return func(ctx *gin.Context) {
-		zlog.Logger.WithContext(ctx).Info("建立请求")
+		zlog.Logger.WithGinContext(ctx).Info("建立请求")
 		ctx.Next()
 	}
 }
+
 // JWTAuth 中间件，检查token
 func JWTAuth() gin.HandlerFunc {
 	return func(ctx *gin.Context) {
@@ -103,13 +104,7 @@ type JWT struct {
 
 // 获取signKey
 func GetSignKey() string {
-	return SignKey
-}
-
-// 这是SignKey
-func SetSignKey(key string) string {
-	SignKey = key
-	return SignKey
+	return tconfig.C.GetString("jwt_sign")
 }
 
 // CreateToken 生成一个token

@@ -1,7 +1,6 @@
 package routes
 
 import (
-	"fmt"
 	"github.com/gin-gonic/gin"
 	"go-web-demo/app/controllers/user"
 	"go-web-demo/app/middlewares"
@@ -20,9 +19,8 @@ func Load(r *gin.Engine) {
 	{
 
 		noAuthRouter.Any("/", func(ctx *gin.Context) {
-			fmt.Println(666666)
-			zlog.Logger.WithContext(ctx).Warn("测试1")
-			zlog.Logger.WithContext(ctx).Error("测试2")
+			zlog.Logger.WithGinContext(ctx).Warn("test log 1")
+			zlog.Logger.WithGinContext(ctx).Error("test log 2")
 			ctx.String(200, "hello.")
 		})
 

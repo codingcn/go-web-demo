@@ -6,7 +6,6 @@ import (
 	"go-web-demo/app/constants"
 	"go-web-demo/app/constants/error_code"
 	"go-web-demo/app/controllers"
-	"go-web-demo/app/middlewares"
 	"go-web-demo/app/repositories"
 	"go-web-demo/app/validators"
 	"go-web-demo/kernel/goredis"
@@ -45,7 +44,7 @@ func (u UserController) BindPhone(ctx *gin.Context) {
 		return
 	}
 	// 从上下文中获取jwt认证用户信息
-	userInfo := ctx.MustGet("claims").(*middlewares.CustomClaims).UserInfo
+	userInfo := u.GetAuthUser(ctx)
 
 	redisDefault := goredis.Connect.Default
 	code := redisDefault.Get(fmt.Sprintf(constants.SMSSendCodeKey, userInfo.UserId, params.Phone)).Val()

@@ -3,3 +3,4 @@ tmp
 go-web-demo.pid
 storage/logs
 vendor
+./dist

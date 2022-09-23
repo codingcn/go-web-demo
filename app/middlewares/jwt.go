@@ -1,6 +1,5 @@
 package middlewares
 
-import "C"
 import (
 	"errors"
 	"github.com/dgrijalva/jwt-go"

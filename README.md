@@ -1,3 +1,6 @@
+## ⚠️重要：该项目已废弃，请访问新项目[https://github.com/go-nunu/nunu](https://github.com/go-nunu/nunu)，获取更好的go web开发体验。
+
+----
 ## Golang web框架demo
 
 **Tips：该项目不包含具体业务逻辑，只提供一个项目空架子**
